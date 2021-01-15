@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <h2>UWAGA! Po zaszyfrowaniu notatki nie da się odzyskać bez hasła</h2>
+    <p>
+        {{ form.post.label }}<br>
+        {{ form.post(cols=32, rows=6) }}<br>
+        {% for error in form.post.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

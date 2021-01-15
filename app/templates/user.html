@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Notatki użytkownika: {{ user.username }}</h1>
+    <hr>
+    <p>Notatki publiczne</p>
+    {% for post in public_posts %}
+    <p>
+    {{ post.author.username }} says: <b>{{ post.body }}</b>
+    </p>
+    {% endfor %}
+    <p>Notatki prywatne</p>
+    {% for post in private_posts %}
+    <p>
+    {{ post.author.username }} says: <b>{{ post.body }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}

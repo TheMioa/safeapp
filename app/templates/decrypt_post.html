@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <h2>Wprowadź numer notatki i hasło</h2>
+    <p>
+        {{ form.note_id.label }}<br>
+        {{ form.note_id(size=36) }}<br>
+        {% for error in form.note_id.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
