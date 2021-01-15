@@ -1,5 +1,6 @@
 import jwt
 import time
+from time import time
 from datetime import datetime
 from app import db, login, app
 from werkzeug.security import generate_password_hash, check_password_hash

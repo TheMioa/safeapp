@@ -16,8 +16,9 @@ def entropy(string):
 def send_password_reset_email(user):
         token = user.get_reset_password_token()
         t = render_template('email/reset_password.html', user=user, token=token)
-        with open("reset_password.txt", "w") as fh:
-                fh.write(t)
+        fh = open("reset_password.txt", "w+") 
+        fh.write(t)
+        fh.close()
 
 def generate_fernet_key(password, salt):
         kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=213700)

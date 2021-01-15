@@ -1,4 +1,5 @@
 import config, os, uuid, base64, time
+from time import time
 from flask import render_template, flash, redirect, url_for, request, abort, send_from_directory, current_app
 from app import  app, db, login
 from app.forms import LoginForm, RegistrationForm, PostForm, FileForm, ResetPasswordRequestForm, ResetPasswordForm, EncryptedNotesForm, DecrypytNotesForm
@@ -113,12 +114,13 @@ def reset_password_request():
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user:
-            send_password_reset_email(user)
+        if not user:
+            flash('Podany adres email nie istnieje w bazie')
+            return redirect(url_for('reset_password_request'))
+        send_password_reset_email(user)
         flash('Instrukcja została wysłana na maila')
         return redirect(url_for('login'))
-    return render_template('reset_password_request.html',
-                           title='Reset Password', form=form)
+    return render_template('reset_password_request.html', title='Reset Password', form=form)
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
