@@ -9,13 +9,13 @@ from werkzeug.urls import url_parse
 from werkzeug.utils import secure_filename
 from cryptography.fernet import Fernet
 
-@app.route('/')
+
 @app.route('/index')
 @login_required
 def index():
     return render_template('index.html', title='Home')
 
-
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -23,6 +23,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        time.sleep(3)
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
