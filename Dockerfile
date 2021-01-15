@@ -1,21 +1,22 @@
-FROM python:3.6-alpine3.11
+FROM ubuntu
 
-RUN adduser -D safeapp
-
+RUN useradd -ms /bin/bash safeapp
 WORKDIR /home/safeapp
 
+RUN apt-get update -y
+RUN apt-get install -y python3
+RUN apt-get install -y python3-venv
+
 COPY requirements.txt requirements.txt
-RUN python -m venv venv
-RUN apk update && apk add python3-dev \
-                        gcc \
-                        libc-dev
-RUN pip install cryptography==3.3.1
+RUN python3 -m venv venv
+RUN venv/bin/pip install wheel
 RUN venv/bin/pip install -r requirements.txt
 RUN venv/bin/pip install gunicorn
 
 COPY app app
 COPY migrations migrations
 COPY safeapp.py config.py boot.sh ./
+COPY certs certs
 RUN chmod +x boot.sh
 
 ENV FLASK_APP safeapp.py

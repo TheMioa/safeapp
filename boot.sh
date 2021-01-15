@@ -1,5 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source venv/bin/activate
 flask db upgrade
-flask translate compile
-exec gunicorn -b :5000 --access-logfile - --error-logfile - microblog:app
+exec gunicorn -c config.py --certfile=./certs/cert.pem --keyfile=./certs/key.pem -b :5000 --access-logfile - --error-logfile - safeapp:app
