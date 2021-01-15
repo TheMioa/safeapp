@@ -17,6 +17,8 @@ COPY app app
 COPY migrations migrations
 COPY safeapp.py config.py boot.sh ./
 COPY certs certs
+RUN mkdir ./app/uploads
+RUN mkdir ./app/notes
 RUN chmod +x boot.sh
 
 ENV FLASK_APP safeapp.py

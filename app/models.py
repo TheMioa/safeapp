@@ -1,4 +1,5 @@
 import jwt
+import time as time1
 from time import time
 from datetime import datetime
 from app import db, login, app
@@ -14,7 +15,7 @@ class User(UserMixin, db.Model):
     priv_message = db.relationship('PrivPost', backref='recipient', lazy='dynamic')
     files = db.relationship('File', backref='owner', lazy='dynamic')
     def check_password(self, password):
-        time.sleep(3)
+        time1.sleep(3)
         return check_password_hash(self.password_hash, password)
 
     def set_password(self, password):
@@ -66,7 +67,7 @@ class EncryptedNote(db.Model):
     file_id = db.Column(db.Integer, db.ForeignKey('file.id'))
 
     def check_password(self, password):
-        time.sleep(3)
+        time1.sleep(3)
         return check_password_hash(self.password_hash, password)
 
     def set_password(self, password):

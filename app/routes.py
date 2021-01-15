@@ -1,5 +1,4 @@
-import config, os, uuid, base64
-from time import time
+import config, os, uuid, base64, time
 from flask import render_template, flash, redirect, url_for, request, abort, send_from_directory, current_app
 from app import  app, db, login
 from app.forms import LoginForm, RegistrationForm, PostForm, FileForm, ResetPasswordRequestForm, ResetPasswordForm, EncryptedNotesForm, DecrypytNotesForm
