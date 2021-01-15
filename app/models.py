@@ -1,5 +1,4 @@
 import jwt
-import time
 from time import time
 from datetime import datetime
 from app import db, login, app
